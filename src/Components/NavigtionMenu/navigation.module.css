@@ -1,0 +1,49 @@
+.NavigationMenuContainer{
+    width: 250px;
+    height: 100vh;
+    padding: 10px 20px 0px 10px;
+    background-color: rgb(0, 183, 255);
+}
+
+.NavigationMenuContainer ul{
+    margin-top: -120px;
+}
+
+.NavigationMenuContainer ul a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+   
+}
+
+.NavigationMenuContainer ul li{
+    list-style: none;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+}
+
+.NavigationMenuContainer ul a:hover{
+
+    text-decoration: underline;
+    text-underline-offset: 10px;
+
+}
+
+.navtigationIcons{
+    margin-right: 5px;
+}
+
+.navigationImg{
+   
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.navigationImg img{
+    height: 100%;
+    margin-top: -50px;
+    
+}
