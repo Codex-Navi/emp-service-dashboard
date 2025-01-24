@@ -32,14 +32,29 @@ const dispatch=useDispatch()
         }));
     };
 
+    const req={
+        method:"POST",
+        body:{
+            "firstName": formData.employeeFirstName,
+            "lastName": formData.employeeLastName,
+            "email": formData.employeeEmail,
+            "password": formData.employeePassoword,
+            "phoneNumber":formData.employeePhone
+           },
+        header:{
+          'Content-type':'application/json',
+    
+        }
+        
+    }
 
-    const handleSubmit = (e) => {
+
+    const handleSubmit = async(e) => {
         e.preventDefault();
         // Dispatch form data to Redux
-       dispatch(setEmployeeData(formData));
-        setTimeout(() => {
-            dispatch(addEmployefun())
-        }, 2000);
+        const response = await fetch(`https://navicompu.co.in/api/createuser/`,JSON.stringify(req));
+        const data = await response.json();
+        console.log('employe response',data)
     };
 
     const handleTogglePasswordVisibility = () => {

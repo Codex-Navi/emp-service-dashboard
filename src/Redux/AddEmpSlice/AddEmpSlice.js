@@ -63,7 +63,7 @@ const employeAddSlice=createSlice({
          state.employeePassoword=employeePassoword;
          state.employeePhone=employeePhone
 
-        
+
     
         },
     },
