@@ -39,7 +39,7 @@ const req={
 
 export const addEmployefun=createAsyncThunk('employe/addEmploye',async()=>{
     try{
-        console.log("data of body",req);
+    
         
         const response = await fetch(`https://navicompu.co.in/api/createuser/`,JSON.stringify(req));
         const data = await response.json();
