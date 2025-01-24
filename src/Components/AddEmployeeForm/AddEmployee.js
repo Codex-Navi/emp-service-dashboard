@@ -52,7 +52,7 @@ const dispatch=useDispatch()
     const handleSubmit = async(e) => {
         e.preventDefault();
         // Dispatch form data to Redux
-        const response = await fetch(`https://navicompu.co.in/api/createuser/`,req);
+        const response = await fetch(`https://navicompu.co.in/api/createuser/`,JSON.stringify(req));
         const data = await response.json();
         console.log('employe response',data)
     };
