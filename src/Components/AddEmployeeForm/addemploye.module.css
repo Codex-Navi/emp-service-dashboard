@@ -1,0 +1,14 @@
+.modelBox{
+    border-radius: 20px;
+    padding: 20px 50px 50px 50px;
+}
+
+.nameFieldWrape{
+    display: flex;
+}
+
+.formHeader{
+    text-align: center;
+    padding-bottom: 20px;
+    font-weight: 900;
+}

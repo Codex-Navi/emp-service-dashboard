@@ -254,6 +254,9 @@ export default function TableComponent(props) {
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [age, setAge] = React.useState('');
 
+    console.log("user table data",props);
+    
+
     const handleChange = (event) => {
         setAge(event.target.value);
     };
@@ -318,6 +321,8 @@ export default function TableComponent(props) {
     );
 
     return (
+
+        
         <Box style={{height:'100%'}}>
             <Paper sx={{ width: '100%', mb: 2 }}>
                 <EnhancedTableToolbar numSelected={selected.length} name={props.name} />
@@ -337,6 +342,16 @@ export default function TableComponent(props) {
                             rowCount={rows.length}
                         />
                         <TableBody>
+                            {props.userdata.map((data,index)=>{
+
+                                return <TableRow key={index}>
+                                    <TableCell>{data.companyName}</TableCell>
+                                </TableRow>
+
+                            }
+                                
+                            
+                            )}
                             {visibleRows.map((row, index) => {
                                 const isItemSelected = selected.includes(row.id);
                                 const labelId = `enhanced-table-checkbox-${index}`;
