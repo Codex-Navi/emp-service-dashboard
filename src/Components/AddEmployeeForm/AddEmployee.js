@@ -34,11 +34,11 @@ const dispatch=useDispatch()
 
     const req={
     
-            "firstName": formData.employeeFirstName,
-            "lastName": formData.employeeLastName,
-            "email": formData.employeeEmail,
-            "password": formData.employeePassoword,
-            "phoneNumber":formData.employeePhone
+            firstName: formData.employeeFirstName,
+            lastName: formData.employeeLastName,
+            email: formData.employeeEmail,
+            password: formData.employeePassoword,
+            phoneNumber:formData.employeePhone
         
     
         
