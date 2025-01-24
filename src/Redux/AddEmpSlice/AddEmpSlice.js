@@ -21,7 +21,7 @@ const initialState={
 
 
 
-const body={
+const req={
     method:"POST",
     body:{
         "firstName": initialState.employeeFirstName,
@@ -32,15 +32,16 @@ const body={
        },
     header:{
       'Content-type':'application/json',
-      
+
     }
     
 }
 
 export const addEmployefun=createAsyncThunk('employe/addEmploye',async()=>{
     try{
-
-        const response = await fetch(`https://navicompu.co.in/api/createuser/`,body);
+        console.log("data of body",req);
+        
+        const response = await fetch(`https://navicompu.co.in/api/createuser/`,JSON.stringify(req));
         const data = await response.json();
         return data;
 
