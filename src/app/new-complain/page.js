@@ -53,7 +53,7 @@ console.log("Coplained data =====",complainData)
 
     return (
         <div style={{height:'100%'}}>
-             {complainData.resp ?<NewComplainTable name={'Pending'} complaindata={complainData.resp} employeeData={employeeData} />:<LinearProgress />}
+             {complainData.length > 0 ?<NewComplainTable name={'Pending'} complaindata={complainData} employeeData={employeeData} />:<LinearProgress />}
         </div>
     );
 }

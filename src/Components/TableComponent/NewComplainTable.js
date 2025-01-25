@@ -99,7 +99,9 @@ const NewComplainTable = (props) => {
                     </TableHead>
                     <TableBody>
                         {visibleRows.map((complaint, index) => (
+                            
                             <TableRow key={complaint._id}>
+                        
                                 <TableCell className={styles.tableData}>{page * rowsPerPage + index + 1}</TableCell>
                                 <TableCell className={styles.tableData}>{complaint.tcId}</TableCell>
                                 <TableCell className={styles.tableData}>{complaint.machineId}</TableCell>
@@ -135,7 +137,7 @@ const NewComplainTable = (props) => {
             <TablePagination
                 rowsPerPageOptions={[10, 15, 20]}
                 component="div"
-                count={props.userdata.length}
+                count={props.complaindata.length}
                 rowsPerPage={rowsPerPage}
                 page={page}
                 onPageChange={handleChangePage}
