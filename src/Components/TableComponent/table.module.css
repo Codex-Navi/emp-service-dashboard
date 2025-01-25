@@ -1,0 +1,25 @@
+.pendingHeader{
+   
+     margin-bottom: 30px;
+    padding:20px 0 20px 10px;
+    background: #090979;
+    color: white;
+}
+
+.tableHead{
+    background: rgb(2, 161, 224);
+    color: white;
+}
+
+.tableHeadData{
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+}
+
+.tableData{
+    text-align: center !important;
+    font-size: 16px !important;
+   
+}

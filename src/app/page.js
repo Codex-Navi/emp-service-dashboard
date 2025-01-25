@@ -5,9 +5,11 @@ import Barchart from '@/Components/Barcharts/Barchart';
 import Piechar from '@/Components/PieCharts/Piechar';
 import Linecharts from '@/Components/Linecharts/Linecharts';
 import Gauges from '@/Components/Gauge/Gauges';
-import { Modal} from '@mui/material';
+import { Button, Modal} from '@mui/material';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 
 import AddEmployee from '@/Components/AddEmployeeForm/AddEmployee';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 
 
@@ -22,7 +24,9 @@ function page(props) {
 
 
 
+const handleLogOut=()=>{
 
+}
 
 
 
@@ -31,8 +35,11 @@ function page(props) {
 
   return (
     <div className={styles.mainPageConatiner}>
-      <div className={styles.topsection}>
-        <button className={styles.addMemberBtn} onClick={handleOpen}>Add Member</button>
+      <section className={styles.topsection}>
+      <Button className={styles.addMemberBtn} variant="outlined" startIcon={<GroupAddIcon />} onClick={handleOpen}>Add Member</Button>
+      <Button className={styles.addMemberBtn} variant="outlined" startIcon={<LogoutIcon />} onClick={handleLogOut}>Logout</Button>
+        
+       
         <Modal
           className={styles.maodelcont}
           open={open}
@@ -41,29 +48,37 @@ function page(props) {
           aria-describedby="modal-modal-description"
         >
           <AddEmployee/>
+          
         </Modal>
-      </div>
+      </section>
       <section className={styles.homeHeaderSection}>
+
+      <div className={styles.homeHeaderNewComplain}>
+          <h1>New Complain</h1>
+          <h2>2000</h2>
+        </div>
 
         <div className={styles.homeHeaderPending}>
           <h1>Pending</h1>
           <h2>2000</h2>
         </div>
 
-        <div className={styles.homeHeaderCompleted}>
-          <h1>Completed</h1>
+        <div className={styles.homeHeaderPostpond}>
+          <h1>PostPond</h1>
           <h2>4000</h2>
         </div>
 
-        <div className={styles.homeHeaderCustomerReview}>
-          <h1>Customer Review</h1>
+        <div className={styles.homeHeaderComplet}>
+          <h1>Completed</h1>
           <h2>1000</h2>
         </div>
 
-        <div className={styles.homeHeaderCustomerextra}>
-          <h1>Extra</h1>
-          <h2>2000</h2>
+        <div className={styles.homeHeaderCancell}>
+          <h1>Cancelled</h1>
+          <h2>1000</h2>
         </div>
+
+       
 
       </section>
 

@@ -1,5 +1,6 @@
-import PendingComplainTable from '@/Components/TableComponent/PendingComplainTable';
+import PostPondComplainTable from '@/Components/TableComponent/PostPondComplainTable';
 import React from 'react';
+
 
 const data=[
     {
@@ -22,8 +23,7 @@ const data=[
 function page(props) {
     return (
         <div>
-           
-            <PendingComplainTable complaindata={data}/>
+            <PostPondComplainTable complaindata={data}/>
         </div>
     );
 }

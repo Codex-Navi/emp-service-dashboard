@@ -1,5 +1,7 @@
-import PendingComplainTable from '@/Components/TableComponent/PendingComplainTable';
+import CancelledComplainTable from '@/Components/TableComponent/CancelledComplainTable';
 import React from 'react';
+
+
 
 const data=[
     {
@@ -19,11 +21,12 @@ const data=[
     }
 ]
 
+
+
 function page(props) {
     return (
         <div>
-           
-            <PendingComplainTable complaindata={data}/>
+            <CancelledComplainTable complaindata={data}/>
         </div>
     );
 }

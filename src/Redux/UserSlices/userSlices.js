@@ -1,74 +1,63 @@
-"use client"
-import { createSlice,createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios'
+"use client";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
-// export  const fetchUser=createAsyncThunk('user/fetchUserData',()=>{
-//    return fetch('http://192.168.1.240/api/fetchcomplaint/',{
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//       // Include other headers if needed
-//     },
-//     credentials: 'include', // If you need to include cookies
-//   })
-//     .then(respnse=>console.log("fetch user data",respnse))
-// })
+export const fetchComplaint = createAsyncThunk("user/fetchComplainData", async () => {
+  try {
+    const response = await fetch('https://navicompu.co.in/api/fetchcomplaint/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "sortKey": "address",
+            "sortValue": 1,
+            "skip": 0,
+            "limit": 20,
+            sp: {
+                status: 1
+            }
+        }),
+    });
 
-const body={
-    method:"POST",
-    body:{
+    const data = await response.json();
+  
+    return data
    
-        "sortKey": "address",
-        "sortValue": 1,
-        "skip": 10,
-        "limit": 10
-    },
-    header:{
-        'Content-type':'application/json',
-    }
+} catch (error) {
+    return error.message
 }
+});
 
-export const fetchUser = createAsyncThunk('user/fetchUserData', async () => {
-      try {
-        const response = await fetch(`https://navicompu.co.in/api/fetchcomplaint/`,body);
-        const data = await response.json();
-        return data;
-      } catch (error) {
-        return error.message;
-      }
-    }
-  );
+// Initial State
+const initialState = {
+  loading: false,
+  complaindata: [],
+  error: "",
+};
 
+// Create Slice
+const userSlice = createSlice({
+  name: "user",
+  initialState,
+  extraReducers: (builder) => {
+    builder.addCase(fetchComplaint.pending, (state) => {
+      state.loading = true;
+    });
 
-const initialState={
-    loading:false,
-    usersdata:[],
-    error:'',
-}
+    builder.addCase(fetchComplaint.fulfilled, (state, action) => {
+      console.log("Fulfilled Data:", action.payload);
+      state.loading = false;
+      state.complaindata = action.payload.data.resp; // Ensure action.payload.data exists
+      state.error = "";
+    });
 
-const userSlice=createSlice({
-name:'user',
-initialState,
-extraReducers:builder=>{
-    builder.addCase(fetchUser.pending,state=>{
-        state.loading=true
-    })
+    builder.addCase(fetchComplaint.rejected, (state, action) => {
+      state.loading = false;
+      state.complaindata = [];
+      state.error = action.payload || "Something went wrong";
+    });
+  },
+});
 
-    builder.addCase(fetchUser.fulfilled,(state,action)=>{
-        console.log("fullfilled data",action);
-        
-        state.loading=false
-        state.usersdata =action.payload.data
-        state.error=''
-    })
-
-    builder.addCase(fetchUser.rejected,(state,action)=>{
-        state.loading=false
-        state.usersdata=[]
-        state.error=action.error.message
-    })
-}
-})
-
-export default userSlice.reducer
+export default userSlice.reducer;

@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import styles from './addemploye.module.css'
-import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
+import { Alert, Box, Button, IconButton, InputAdornment, Snackbar, TextField, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { useDispatch } from 'react-redux';
-import { addEmployefun, setEmployeeData } from '@/Redux/AddEmpSlice/AddEmpSlice';
 
 
 
@@ -12,6 +10,8 @@ import { addEmployefun, setEmployeeData } from '@/Redux/AddEmpSlice/AddEmpSlice'
 
 function AddEmployee(props) {
     const [showPassword, setShowPassword] = useState(false);
+    const [snackBarOpen, setSnackBarOpen] = useState(false)
+    const [snackBarMessage, setSnackBarMessage] = useState('')
     const [formData, setFormData] = useState({
         employeeFirstName: '',
         employeeLastName: '',
@@ -19,9 +19,6 @@ function AddEmployee(props) {
         employeeEmail: '',
         employeePassoword: '',
     });
-
-
-const dispatch=useDispatch()
 
 
     const handleChange = (e) => {
@@ -32,34 +29,43 @@ const dispatch=useDispatch()
         }));
     };
 
-    const req={
-    
-            firstName: formData.employeeFirstName,
-            lastName: formData.employeeLastName,
-            email: formData.employeeEmail,
-            password: formData.employeePassoword,
-            phoneNumber:formData.employeePhone
-        
-    
-        
+    const req = {
+
+        firstName: formData.employeeFirstName,
+        lastName: formData.employeeLastName,
+        email: formData.employeeEmail,
+        password: formData.employeePassoword,
+        phoneNumber: formData.employeePhone
+
+
+
     }
 
 
-    const handleSubmit = async(e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // Dispatch form data to Redux
-        const response = await fetch(`https://navicompu.co.in/api/createuser/`,{
-            method:"POST",
-            body:JSON.stringify(req),
-            headers:{
-              'Content-type':'application/json',
-        
+        const response = await fetch(`https://navicompu.co.in/api/createuser/`, {
+            method: "POST",
+            body: JSON.stringify(req),
+            headers: {
+                'Content-type': 'application/json',
+
             }
-            
+
         });
         const data = await response.json();
-        console.log('employe response',data)
-        console.log('employe response',req)
+
+        console.log("add emplouedadsfasd",data)
+        if(data.status == "success" ){
+            setSnackBarMessage(data.message)
+            setSnackBarOpen(true)
+        }
+        else{
+            setSnackBarMessage("Some Thing Went Wrong")
+            setSnackBarOpen(true)
+        }
+
     };
 
     const handleTogglePasswordVisibility = () => {
@@ -70,12 +76,12 @@ const dispatch=useDispatch()
     return (
         <div>
 
-            <Box className={styles.modelBox}>
-                <Typography className={styles.formHeader}>Add Service Team Member</Typography>
+            <Box className={styles.modelBox} >
+                <p className={styles.formHeader}>Add Service Team Member</p>
                 <form>
                     <div className={styles.nameFieldWrape}>
                         <TextField
-                            style={{ marginBottom: '20px' }}
+                            style={{ marginBottom: '20px',background:'white',borderRadius:'10px' }}
                             label="Employee FirstName"
                             name="employeeFirstName"
                             variant="outlined"
@@ -86,7 +92,7 @@ const dispatch=useDispatch()
                         />
 
                         <TextField
-                            style={{ marginBottom: '20px',marginLeft:'10px' }}
+                            style={{ marginBottom: '20px', marginLeft: '10px',background:'white' ,borderRadius:'10px' }}
                             label="Employee LastName"
                             name="employeeLastName"
                             variant="outlined"
@@ -101,7 +107,8 @@ const dispatch=useDispatch()
 
                     <div>
                         <TextField
-                            style={{ marginBottom: '20px' }}
+                           
+                            style={{ marginBottom: '20px',background:'white',borderRadius:'10px'  }}
                             label="Employee Phone No."
                             name="employeePhone"
                             variant="outlined"
@@ -114,7 +121,7 @@ const dispatch=useDispatch()
 
                     <div>
                         <TextField
-                            style={{ marginBottom: '20px' }}
+                            style={{ marginBottom: '20px',background:'white' ,borderRadius:'10px' }}
                             label="Employee Email"
                             name="employeeEmail"
                             variant="outlined"
@@ -128,8 +135,8 @@ const dispatch=useDispatch()
 
                     <div>
                         <TextField
-                        
-                            style={{ marginBottom: '20px' }}
+                            className={styles.passwordField}
+                            
                             label="Password"
                             name='employeePassoword'
                             type={showPassword ? 'text' : 'password'}
@@ -152,12 +159,23 @@ const dispatch=useDispatch()
                             }}
                         />
                     </div>
-                    <Button onClick={handleSubmit} variant="contained" color="primary" fullWidth>
+                    <Button style={{marginTop:'20px'}} onClick={handleSubmit} variant="contained" color="primary" fullWidth>
                         Submit
                     </Button>
                 </form>
 
             </Box>
+
+
+            <Snackbar
+                open={snackBarOpen}
+                autoHideDuration={3000} // Auto close after 3 seconds
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} // Adjust position
+            >
+                <Alert >
+                    {snackBarMessage}
+                </Alert>
+            </Snackbar>
 
         </div>
     );

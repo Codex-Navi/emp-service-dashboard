@@ -1,6 +1,8 @@
 .modelBox{
     border-radius: 20px;
     padding: 20px 50px 50px 50px;
+    background:#090979 ;
+    color: white;
 }
 
 .nameFieldWrape{
@@ -11,4 +13,10 @@
     text-align: center;
     padding-bottom: 20px;
     font-weight: 900;
+    font-size: 20px;
+}
+
+.passwordField{
+    background:white !important; 
+    border-radius: 10px;
 }
