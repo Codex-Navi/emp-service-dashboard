@@ -29,11 +29,43 @@ export const fetchComplaint = createAsyncThunk("user/fetchComplainData", async (
 }
 });
 
+
+
+
+
+
+export const fetchComplaintCount = createAsyncThunk("user/fetchComplainCountData", async () => {
+  try {
+    const response = await fetch('https://navicompu.co.in/api/dashboarddata', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}),
+    });
+
+    const data = await response.json();
+  
+    return data
+   
+} catch (error) {
+    return error.message
+}
+});
+
+
+
+
+
+
+
 // Initial State
 const initialState = {
   loading: false,
   complaindata: [],
   error: "",
+  complainCountData:[]
+
 };
 
 // Create Slice
@@ -57,6 +89,30 @@ const userSlice = createSlice({
       state.complaindata = [];
       state.error = action.payload || "Something went wrong";
     });
+
+
+
+    builder.addCase(fetchComplaintCount.pending, (state) => {
+      state.loading = true;
+    });
+
+    builder.addCase(fetchComplaintCount.fulfilled, (state, action) => {
+      console.log("Fulfilled Data:", action.payload);
+      state.loading = false;
+      state.complainCountData = action.payload.data; // Ensure action.payload.data exists
+      state.error = "";
+    });
+
+    builder.addCase(fetchComplaintCount.rejected, (state, action) => {
+      state.loading = false;
+      state.complainCountData = [];
+      state.error = action.payload || "Something went wrong";
+    });
+
+
+
+
+
   },
 });
 
